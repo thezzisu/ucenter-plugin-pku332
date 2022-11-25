@@ -1,4 +1,5 @@
-import { definePlugin, api } from '@ucenter/ui/src/plugin'
+import { definePlugin } from '@ucenter/ui/src/plugin'
+import { isLoggedIn } from '@ucenter/ui/src/api'
 import { useTitle, useFavicon } from '@vueuse/core'
 import { h } from 'vue'
 import { RouterLink } from 'vue-router'
@@ -20,7 +21,7 @@ export default definePlugin({
       path: '/iot',
       component: () => import('./IoTHome.vue'),
       beforeEnter(to, from, next) {
-        if (api.isLoggedIn.value) {
+        if (isLoggedIn.value) {
           next()
         } else {
           next('/login')
