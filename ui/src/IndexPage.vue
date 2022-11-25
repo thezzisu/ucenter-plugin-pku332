@@ -44,5 +44,6 @@ const router = useRouter()
 .p-desc-video {
   height: 640px;
   width: 960px;
+  max-width: 100%;
 }
 </style>

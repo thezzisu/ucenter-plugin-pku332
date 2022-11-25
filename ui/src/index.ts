@@ -1,5 +1,8 @@
-import { definePlugin } from '@ucenter/ui/src/plugin'
+import { definePlugin, api } from '@ucenter/ui/src/plugin'
 import { useTitle, useFavicon } from '@vueuse/core'
+import { h } from 'vue'
+import { RouterLink } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 const title = useTitle()
 title.value = 'PKU332'
@@ -8,5 +11,39 @@ icon.value = 'https://asset.zisu.dev/img/332_180x180.png'
 
 export default definePlugin({
   name: 'pku332',
-  index: () => import('./IndexPage.vue')
+  routes: [
+    {
+      path: '/',
+      component: () => import('./IndexPage.vue')
+    },
+    {
+      path: '/iot',
+      component: () => import('./IoTHome.vue'),
+      beforeEnter(to, from, next) {
+        if (api.isLoggedIn.value) {
+          next()
+        } else {
+          next('/login')
+        }
+      }
+    }
+  ],
+  mainMenu: () => {
+    const { t } = useI18n()
+    return [
+      {
+        key: 'iot',
+        label: () => h(RouterLink, { to: '/iot' }, () => t('iot'))
+      }
+    ]
+  },
+  locales: {
+    en: {
+      iot: 'IoT'
+    },
+    zh: {
+      iot: '物联网'
+    }
+  },
+  policies: ['center:iot']
 })
