@@ -1,5 +1,5 @@
 import { definePlugin } from '@ucenter/ui/src/plugin'
-import { isLoggedIn } from '@ucenter/ui/src/api'
+import { isLoggedIn } from '@ucenter/ui/src/utils'
 import { useTitle, useFavicon } from '@vueuse/core'
 import { h } from 'vue'
 import { RouterLink } from 'vue-router'

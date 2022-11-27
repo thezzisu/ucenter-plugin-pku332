@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { isLoggedIn, userInfo } from '@ucenter/ui/src/api'
+import { isLoggedIn, userInfo } from '@ucenter/ui/src/utils'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
